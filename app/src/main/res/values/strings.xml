@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tab1andTab2_01</string>
+    <string name="test_string">Whatever I wrote in here~</string>
+    <string name="action_settings">Settings</string>
+</resources>
