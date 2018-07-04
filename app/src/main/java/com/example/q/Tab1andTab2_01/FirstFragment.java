@@ -1,20 +1,27 @@
 package com.example.q.Tab1andTab2_01;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FirstFragment extends Fragment{
     public FirstFragment(){
@@ -23,6 +30,9 @@ public class FirstFragment extends Fragment{
     private ListView listView;
     private  FirstFragmentListViewAdapter firstFragmentListViewAdapter;
     private ArrayList<FirstFragmentContactModel> firstFragmentContactModelArrayList;
+    private final static String SpecialNumber = "010-0000-0000";
+    PopupMenu pm;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -41,7 +51,9 @@ public class FirstFragment extends Fragment{
 
         firstFragmentContactModelArrayList = new ArrayList<>();
 
-        Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
+        final Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
+
+
 
         while (phones.moveToNext())
         {
@@ -65,10 +77,42 @@ public class FirstFragment extends Fragment{
             } catch (JSONException e){
                 e.printStackTrace();
             }
+
             firstFragmentContactModelArrayList.add(firstFragmentContactModel);
+
+            if(firstFragmentContactModelArrayList.size() > 1){
+                String prev = getInitialSound(firstFragmentContactModelArrayList.get(firstFragmentContactModelArrayList.size()-2).getName());
+                String curr = getInitialSound(firstFragmentContactModelArrayList.get(firstFragmentContactModelArrayList.size()-1).getName());
+                Log.d("Test-1", "prev : "+prev);
+                Log.d("Test-2","curr : "+curr);
+
+                if(!prev.equals(curr)){
+                    Log.d("Test-3", "this spot!");
+
+
+                    FirstFragmentContactModel korean_character = new FirstFragmentContactModel();
+                    korean_character.setName(firstFragmentContactModelArrayList.get(firstFragmentContactModelArrayList.size()-1).getName());
+                    korean_character.setNumber(SpecialNumber);
+                    firstFragmentContactModelArrayList.add(firstFragmentContactModelArrayList.size()-1,korean_character);
+
+                }
+            }
+
+
+            Log.d("Test","what is name? " + firstFragmentContactModelArrayList.get(firstFragmentContactModelArrayList.size()-1).getName());
+            Log.d("Test1","what is number1? " + firstFragmentContactModelArrayList.get(firstFragmentContactModelArrayList.size()-1).getNumber());
         }
 
         phones.close();
+
+        // for korean letter "ㄱ"
+        FirstFragmentContactModel korean_letter = new FirstFragmentContactModel();
+        korean_letter.setName("기역");
+        korean_letter.setNumber(SpecialNumber);
+        firstFragmentContactModelArrayList.add(0,korean_letter);
+
+
+        // Log.d("Test","what is name? " + firstFragmentContactModelArrayList.get(firstFragmentContactModelArrayList.size()-1).getName());
 
 
         firstFragmentListViewAdapter = new FirstFragmentListViewAdapter(getActivity(), firstFragmentContactModelArrayList);
@@ -78,11 +122,49 @@ public class FirstFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Toast.makeText(getActivity(), firstFragmentContactModelArrayList.get(position).getName(), Toast.LENGTH_LONG).show();
+                /*
+                FirstFragmentPhoneCall firstFragmentPhoneCall;
+                firstFragmentPhoneCall = new FirstFragmentPhoneCall(getActivity());
+                String PhoneNumber = firstFragmentContactModelArrayList.get(position).getNumber();
+                firstFragmentPhoneCall.makeACall("dial",PhoneNumber);
+                */
+
+                /*
+                String PhoneNumber = firstFragmentContactModelArrayList.get(position).getNumber();
+
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+PhoneNumber));
+                startActivity(intent);
+                */
+
+                /*
+                String PhoneNumber = firstFragmentContactModelArrayList.get(position).getNumber();
+                Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+                smsIntent.setData(Uri.parse("smsto:"+PhoneNumber));
+                smsIntent.putExtra("sms_body","");
+                startActivity(smsIntent);
+                */
             }
         });
 
 
         return view;
+    }
+
+    private String getInitialSound(String text) {
+        String[] chs = {
+                "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
+        };
+        if(text.length() > 0) {
+            char chName = text.charAt(0);
+            if(chName >= 0xAC00)
+            {
+                int uniVal = chName - 0xAC00;
+                int cho = ((uniVal - (uniVal % 28))/28)/21;
+
+                return chs[cho];
+            }
+        }
+        return null;
     }
 
 }

@@ -1,44 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/fragment_first_item"
+    >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="#4d1a03"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_item"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/fragment_first_item"
+        >
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="@dimen/letter_icon_size"
+            android:layout_height="@dimen/letter_icon_size"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="@+id/constraint_item"
+            app:layout_constraintRight_toRightOf="@+id/constraint_item"
+            app:layout_constraintTop_toTopOf="@+id/constraint_item"
+            app:layout_constraintBottom_toBottomOf="@+id/constraint_item"
+            android:text="well"
+            android:textSize="21dp"
+            />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="4"
+        android:background="#fdeded"
+        android:layout_marginTop= "3dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:gravity="center_vertical"
             android:text="New Text"
             android:textColor="#000000"
-            android:textSize="24dp" />
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="6dp"
+            android:paddingBottom="1dp"
+            android:gravity="top"
             android:text="New Text"
             android:textColor="#666666"
-            android:textSize="16dp" />
+            android:textSize="12dp" />
     </LinearLayout>
 
 </LinearLayout>

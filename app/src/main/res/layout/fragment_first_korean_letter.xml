@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/fragment_first_item"
+    >
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_item"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:background="@color/fragment_first_item"
+        >
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="@dimen/letter_icon_size"
+            android:layout_height="@dimen/letter_icon_size"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@+id/constraint_item"
+            app:layout_constraintTop_toTopOf="@+id/constraint_item"
+            app:layout_constraintBottom_toBottomOf="@+id/constraint_item"
+            android:text="ㄱ"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <View style="@style/Divider"
+            app:layout_constraintBottom_toBottomOf="@+id/constraint_parent"
+            app:layout_constraintTop_toTopOf="@+id/constraint_parent"
+
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</LinearLayout>

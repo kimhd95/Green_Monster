@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorToolbarText">#ede4e4</color>
+    <color name="fragment_first_item">#fdeded</color>
+    <color name="sideIndex">#dea4a4</color>
+
 </resources>
