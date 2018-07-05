@@ -58,8 +58,9 @@ public class ThirdFragment extends Fragment {
                     "Description TEXT, Sum TEXT)");
 //            DB.execSQL("DELETE FROM history WHERE Description=\"sample\"");
 
-            /*
 
+
+            /*
             DB.execSQL("INSERT INTO history VALUES(2018,07,01,08,30,\"아침\",\"4200\")");
             DB.execSQL("INSERT INTO history VALUES(2018,07,01,09,32,\"매점\",\"2800\")");
             DB.execSQL("INSERT INTO history VALUES(2018,07,01,11,17,\"면도기\",\"12000\")");
@@ -75,8 +76,8 @@ public class ThirdFragment extends Fragment {
             DB.execSQL("INSERT INTO history VALUES(2018,07,03,12,43,\"교통카드\",\"10000\")");
             DB.execSQL("INSERT INTO history VALUES(2018,07,03,15,39,\"기숙사\",\"500000\")");
             DB.execSQL("INSERT INTO history VALUES(2018,07,03,17,32,\"계절학기\",\"50000\")");
-
             */
+
 
 
 

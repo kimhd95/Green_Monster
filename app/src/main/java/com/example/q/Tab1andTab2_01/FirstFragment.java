@@ -214,7 +214,7 @@ public class FirstFragment extends Fragment{
                     startActivity(intent);
 
                     // Toast.makeText(getActivity(), Integer.toString(send_time) + "(" + Integer.toString(send_percent) + "%)", Toast.LENGTH_LONG).show();
-                }
+                } 
             }
         });
 

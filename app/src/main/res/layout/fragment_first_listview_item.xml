@@ -4,7 +4,6 @@
     android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="@color/fragment_first_item"
     >
 
 
@@ -14,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="8dp"
-        android:background="@color/fragment_first_item"
+
         >
 
         <TextView
@@ -40,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:background="#fdeded"
+
         android:layout_marginTop= "3dp"
         android:orientation="vertical">
 
