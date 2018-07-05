@@ -6,28 +6,30 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/time_TEXTVIEW"
+        android:id="@+id/total_TextView"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_weight="2"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="3"
         android:gravity="center"
-        android:text="TextView"
+        android:text="총 지출"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:fontFamily="monospace" />
 
     <TextView
-        android:id="@+id/description_TEXTVIEW"
+        android:id="@+id/empty_TextView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="25dp"
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:gravity="center_vertical"
         android:text="TextView"
         android:textSize="18sp"
         app:fontFamily="casual" />
 
     <TextView
-        android:id="@+id/sum_TEXTVIEW"
+        android:id="@+id/amount_TextView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginRight="10dp"
@@ -36,5 +38,6 @@
         android:gravity="right"
         android:text="TextView"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:fontFamily="casual" />
 </LinearLayout>

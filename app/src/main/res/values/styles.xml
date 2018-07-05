@@ -14,5 +14,11 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
+
+        <item name="android:windowBackground">@drawable/android_hand_drawn_logo_outline</item>
+
+    </style>
+
 
 </resources>

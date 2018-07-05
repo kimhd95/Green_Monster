@@ -93,14 +93,24 @@ public class ThirdFragment extends Fragment {
                 contentModelArrayList.add(new ContentModel(yr, mo, dy, hr, mn, ds, sm));
             }
         }
-        // Divider 역할의 객체 add
+        // Divider, Total 역할의 객체 add
         Cursor cs = DB.rawQuery("SELECT distinct Year, Month, Day FROM history", null);
         while(cs.moveToNext()) {
             int Y = cs.getInt(0);
             int M = cs.getInt(1);
             int D = cs.getInt(2);
-            contentModelArrayList.add(new ContentModel(Y, M, D, 0, 0, "@@DATE@@", "0"));
+            // 총지출 계산하여 Total 객체 추가
+            Cursor cs_in = DB.rawQuery("SELECT sum FROM history WHERE " +
+                    "Year=" + Y + " and Month=" + M + " and Day=" + D, null);
+            int tot = 0;
+            while(cs_in.moveToNext()) {
+                tot += Integer.parseInt(cs_in.getString(0));
+            }
+            contentModelArrayList.add(new ContentModel(Y, M, D, 99, 99, "@@TOTAL@@", Integer.toString(tot)));       // Total 객체
+            contentModelArrayList.add(new ContentModel(Y, M, D, 0, 0, "@@DATE@@", "0"));                      // Divider 객체
         }
+
+
         // 정렬
         comparator = new mComparator();
         Collections.sort(contentModelArrayList, comparator);
@@ -119,6 +129,7 @@ public class ThirdFragment extends Fragment {
                 startActivityForResult(intent, 1111);
             }
         });
+
         //return layout;
         return view;
     }
@@ -142,11 +153,34 @@ public class ThirdFragment extends Fragment {
                 contentModelArrayList.add(new ContentModel(year, month, day, hour, min, desc, sum));
 
                 // 해당 날짜가 새로 추가되었으면 <구분아이템 추가>
-                Cursor csr = DB.rawQuery("SELECT all Year, Month, Day FROM history WHERE Year=" +
+                Cursor csr = DB.rawQuery("SELECT all Year, Month, Day, Sum, Description FROM history WHERE Year=" +
                         year + " and Month=" + month + " and Day=" + day, null);
                 if(csr.getCount() != 0 && csr.getCount() == 1) {
                     csr.moveToFirst();
                     contentModelArrayList.add(new ContentModel(csr.getInt(0), csr.getInt(1), csr.getInt(2), 0, 0, "@@DATE@@", "0"));
+                    contentModelArrayList.add(new ContentModel(csr.getInt(0), csr.getInt(1), csr.getInt(2), 99, 99, "@@TOTAL@@", csr.getString(3)));
+                }
+                // 원래 있던 날짜에 추가되었으면 ArrayList에서 해당 Total객체 찾아서 변경
+                else if (csr.getCount() > 2) {
+                    //csr.moveToFirst();
+                    int tot = 0;
+                    while(csr.moveToNext()) {
+                        tot += Integer.parseInt(csr.getString(3));
+                    }
+                    //int t = Integer.parseInt(sum) + old_sum;
+                    int idx = -1;
+                    for (int i=0; i < contentModelArrayList.size(); i++) {
+                        if(contentModelArrayList.get(i).getYear() == year &&
+                                contentModelArrayList.get(i).getMonth() == month &&
+                                contentModelArrayList.get(i).getDay() == day &&
+                                contentModelArrayList.get(i).getDescription().equals("@@TOTAL@@") == true) {
+                            idx = i;
+                            break;
+                        }
+                    }
+                    if (idx > -1)
+                        contentModelArrayList.get(idx).setSum(Integer.toString(tot));
+
                 }
 
 

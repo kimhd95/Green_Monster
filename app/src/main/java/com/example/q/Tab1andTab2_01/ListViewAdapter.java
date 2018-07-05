@@ -54,6 +54,17 @@ public class ListViewAdapter extends BaseAdapter {
             holder.tvdesc.setText(y + "년 " + m + "월 " + d + "일");
             holder.tvsum.setText("");
         }
+        else if (contentModelArrayList.get(position).getDescription() == "@@TOTAL@@") {
+            convertView = inflater.inflate(R.layout.total_listview, null);
+            holder.tvtime = (TextView) convertView.findViewById(R.id.total_TextView);
+            holder.tvdesc = (TextView) convertView.findViewById(R.id.empty_TextView);
+            holder.tvsum = (TextView) convertView.findViewById(R.id.amount_TextView);
+            convertView.setTag(holder);
+            holder.tvtime.setText("총 지출");
+            holder.tvdesc.setText("");
+            int t = Integer.parseInt(contentModelArrayList.get(position).getSum());
+            holder.tvsum.setText("￦ " + String.format("%,d", t));
+        }
         else {
             convertView = inflater.inflate(R.layout.item_listview, null);
             holder.tvtime = (TextView) convertView.findViewById(R.id.time_TEXTVIEW);
