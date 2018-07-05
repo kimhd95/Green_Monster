@@ -2,8 +2,11 @@ package com.example.q.Tab1andTab2_01;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,14 +34,14 @@ public class FirstFragment extends Fragment{
     public FirstFragment(){
     }
 
+    private Intent intent;
     private ListView listView;
-    private FloatingActionButton floatingActionButton;
     private ImageButton btnScrollTop;
 
     private  FirstFragmentListViewAdapter firstFragmentListViewAdapter;
     private ArrayList<FirstFragmentContactModel> firstFragmentContactModelArrayList;
     private final static String SpecialNumber = "010-0000-0000";
-    PopupMenu pm;
+    SQLiteDatabase db;
 
 
     @Override
@@ -54,15 +58,38 @@ public class FirstFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_first,null);
 
         listView = (ListView)view.findViewById(R.id.listview1);
-        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
-
 
         firstFragmentContactModelArrayList = new ArrayList<>();
 
+        // 통화기록 DB에 저장
+
+        File f = new File(getActivity().getFilesDir(), "callData.db");
+        try {
+            db = SQLiteDatabase.openOrCreateDatabase(f, null);
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
+        if (db != null) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS callHistory (Name STRING, " +
+                    "Phone STRING, Duration STRING, Type STRING)");
+            db.execSQL("DELETE FROM callHistory");
+
+            // db에 통화기록 insert
+            String[] projection = {CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DURATION, CallLog.Calls.TYPE};
+            Cursor callog = getContext().getContentResolver().query(CallLog.Calls.CONTENT_URI,
+                    projection, null, null, CallLog.Calls.DEFAULT_SORT_ORDER);
+            while(callog.moveToNext()) {
+                String name = callog.getString(0);
+                String phone = callog.getString(1);
+                String duration = callog.getString(2);
+                String type = callog.getString(3);
+                String sql = "INSERT INTO callHistory VALUES (\"" + name + "\", \"" + phone + "\", \"" + duration + "\", \"" + type + "\")";
+                db.execSQL(sql);
+            }
+        }
+
+
         final Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
-
-
-
         while (phones.moveToNext())
         {
             // json으로 받기
@@ -125,41 +152,69 @@ public class FirstFragment extends Fragment{
         listView.setAdapter(firstFragmentListViewAdapter);
 
 
-        floatingActionButton.setOnClickListener(new FloatingActionButton.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                listView.smoothScrollToPosition(0);
 
-            }
-
-        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Log.d("Test03", "positionis "+position);
-                Toast.makeText(getActivity(), firstFragmentContactModelArrayList.get(position).getName(), Toast.LENGTH_LONG).show();
-                /*
-                FirstFragmentPhoneCall firstFragmentPhoneCall;
-                firstFragmentPhoneCall = new FirstFragmentPhoneCall(getActivity());
-                String PhoneNumber = firstFragmentContactModelArrayList.get(position).getNumber();
-                firstFragmentPhoneCall.makeACall("dial",PhoneNumber);
-                */
+                Cursor cursor_callDB = db.rawQuery("SELECT all Name, Phone, Duration, Type FROM callHistory WHERE Name=\"" +
+                        firstFragmentContactModelArrayList.get(position).getName() + "\"", null);
+                if (cursor_callDB.getCount() > 0) {
+                    String call_time;               // 총 통화횟수
+                    int receive_time = 0;           // 수신 횟수
+                    int send_time = 0;              // 발신 횟수
+                    int absence_time = 0;           // 부재중 횟수
+                    String dur;                     // dur : 통화시간
 
-                /*
-                String PhoneNumber = firstFragmentContactModelArrayList.get(position).getNumber();
+                    cursor_callDB.moveToFirst();
+                    call_time = Integer.toString(cursor_callDB.getCount());
 
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+PhoneNumber));
-                startActivity(intent);
-                */
+                    String name = cursor_callDB.getString(0);
+                    String phone = cursor_callDB.getString(1);
 
-                /*
-                String PhoneNumber = firstFragmentContactModelArrayList.get(position).getNumber();
-                Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
-                smsIntent.setData(Uri.parse("smsto:"+PhoneNumber));
-                smsIntent.putExtra("sms_body","");
-                startActivity(smsIntent);
-                */
+                    int dur_i = 0;
+                    do {
+                        dur = cursor_callDB.getString(2);
+                        dur_i += Integer.parseInt(dur);
+                        String type = cursor_callDB.getString(3);
+                        if(type.equals("1"))
+                            receive_time++;
+                        else if(type.equals("2"))
+                            send_time++;
+                        else if(type.equals("3"))
+                            absence_time++;
+                    } while (cursor_callDB.moveToNext());
+                    dur = Integer.toString(dur_i);
+                    String hr = Integer.toString(Integer.parseInt(dur) / 3600);
+                    if (hr.length() == 1)
+                        hr = "0" + hr;
+                    String mn = Integer.toString((Integer.parseInt(dur) / 60) % 60);
+                    if (mn.length() == 1)
+                        mn = "0" + mn;
+                    String sc = Integer.toString(Integer.parseInt(dur) % 60);
+                    if (sc.length() == 1)
+                        sc = "0" + sc;
+                    dur = hr + " : " + mn + " : " + sc;
+
+                    int receive_percent = 100*receive_time / Integer.parseInt(call_time);
+                    int send_percent = 100*send_time / Integer.parseInt(call_time);
+                    int absence_percent = 100*absence_time / Integer.parseInt(call_time);
+                    String rec = Integer.toString(receive_time) + " ( " + Integer.toString(receive_percent) + "%)";
+                    String snd = Integer.toString(send_time) + " ( " + Integer.toString(send_percent) + "%)";
+                    String abs = Integer.toString(absence_time) + " ( " + Integer.toString(absence_percent) + "%)";
+
+                    intent = new Intent(getActivity(), ContactDetailPage.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("phone", phone);
+                    intent.putExtra("duration", dur);
+                    intent.putExtra("call", call_time);
+                    intent.putExtra("receive", rec);
+                    intent.putExtra("send", snd);
+                    intent.putExtra("absence", abs);
+                    startActivity(intent);
+
+                    // Toast.makeText(getActivity(), Integer.toString(send_time) + "(" + Integer.toString(send_percent) + "%)", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

@@ -24,19 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" >
         </ListView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:layout_marginRight="40dp"
-        android:background="#000000"
-        android:clickable="true"
-        app:backgroundTint="#d47c7c"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_call"
-        />
+
 
     <ImageButton
         android:id="@+id/imageScrollTop"
@@ -45,7 +33,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/scrolltop_transparent_03"
         android:background="@android:color/transparent"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

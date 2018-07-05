@@ -22,13 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
 
-
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initializeGood();
 
         toolbar = findViewById(R.id.my_toolbar);
         toolbar.setTitleTextColor(Color.parseColor("#ede4e4"));
@@ -154,4 +153,21 @@ public class MainActivity extends AppCompatActivity {
             return 3;
         }
     }
+
+    private void initializeGood() 	{
+        InitializationRunnable init = new InitializationRunnable();
+        new Thread(init).start();
+    }
+
+    /**
+     * 초기화 작업 처리
+     */
+    class InitializationRunnable implements Runnable {
+        public void run() {
+            // 여기서부터 초기화 작업 처리
+            // do_something
+        }
+    }
+
+
 }

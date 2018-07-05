@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.DIAL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-
-
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.Write_CALL_LOG" />
 
     <application
         android:allowBackup="true"
@@ -17,45 +17,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.q.Tab1andTab2_01.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.q.Tab1andTab2_01.GalleryActivity">
+        <activity android:name=".GalleryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.q.Tab1andTab2_01.ImagesGridActivity">
+        <activity android:name=".ImagesGridActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.q.Tab1andTab2_01.ImageViewActivity">
+        <activity android:name=".ImageViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.q.Tab1andTab2_01.AddItemActivity">
-
-        </activity>
-
-        <activity android:name=".LoadingActivity"
+        <activity android:name=".AddItemActivity"></activity>
+        <activity
+            android:name=".LoadingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
+        <activity android:name=".ContactDetailPage" />
     </application>
 
 </manifest>

@@ -2,4 +2,6 @@
     <string name="app_name">Tab1andTab2_01</string>
     <string name="test_string">Whatever I wrote in here~</string>
     <string name="action_settings">Settings</string>
+    <string name="duration">100</string>
+
 </resources>

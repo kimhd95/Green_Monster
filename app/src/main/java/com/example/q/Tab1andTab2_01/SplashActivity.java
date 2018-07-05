@@ -8,15 +8,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.widget.ImageView;
 
-public class LoadingActivity extends Activity {
+public class SplashActivity extends Activity {
     ImageView img;
     AnimationDrawable ani;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loading);
+        setContentView(R.layout.splash);
         initialize();
     }
 
@@ -28,7 +27,7 @@ public class LoadingActivity extends Activity {
             }
         };
 
-        handler.sendEmptyMessageDelayed(0, 4800);	// ms, 3초후 종료시킴
+        handler.sendEmptyMessageDelayed(0, 5000);	// ms, 3초후 종료시킴
         img=(ImageView)findViewById(R.id.loading_img);
         ani=(AnimationDrawable)img.getDrawable();
         new Thread(new Runnable() {
@@ -69,8 +68,6 @@ public class LoadingActivity extends Activity {
 
                 */
 
-
-
                 /*
                 handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
@@ -91,4 +88,5 @@ public class LoadingActivity extends Activity {
 
 
     }
+
 }

@@ -18,8 +18,8 @@ android {
     }
 }
 
-repositories{
-    maven{
+repositories {
+    maven {
         url 'http://dl.bintray.com/amulyakhare/maven'
     }
 }
