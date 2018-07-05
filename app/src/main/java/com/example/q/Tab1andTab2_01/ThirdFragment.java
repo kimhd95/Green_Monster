@@ -56,27 +56,27 @@ public class ThirdFragment extends Fragment {
             DB.execSQL("CREATE TABLE IF NOT EXISTS history (Year INTEGER, " +
                     "Month INTEGER, Day INTEGER, Hour INTEGER, Minute INTEGER, " +
                     "Description TEXT, Sum TEXT)");
-//            DB.execSQL("DELETE FROM history WHERE Description=\"sample\"");
+            //DB.execSQL("DELETE FROM history WHERE Description=\"sample\"");
 
 
 
-            /*
-            DB.execSQL("INSERT INTO history VALUES(2018,07,01,08,30,\"아침\",\"4200\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,01,09,32,\"매점\",\"2800\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,01,11,17,\"면도기\",\"12000\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,01,12,04,\"점심\",\"6500\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,01,13,10,\"커피\",\"4200\")");
 
-            DB.execSQL("INSERT INTO history VALUES(2018,07,02,11,30,\"점심\",\"9000\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,02,12,30,\"커피\",\"4400\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,02,18,30,\"저녁\",\"5200\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,02,23,31,\"술\",\"42000\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,04,08,30,\"아침\",\"4200\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,01,09,32,\"매점\",\"2800\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,01,11,17,\"면도기\",\"12000\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,01,12,04,\"점심\",\"6500\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,01,13,10,\"커피\",\"4200\")");
 
-            DB.execSQL("INSERT INTO history VALUES(2018,07,03,11,48,\"서브웨이\",\"3900\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,03,12,43,\"교통카드\",\"10000\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,03,15,39,\"기숙사\",\"500000\")");
-            DB.execSQL("INSERT INTO history VALUES(2018,07,03,17,32,\"계절학기\",\"50000\")");
-            */
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,05,11,30,\"점심\",\"9000\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,05,12,30,\"커피\",\"4400\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,02,18,30,\"저녁\",\"5200\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,02,23,31,\"술\",\"42000\")");
+
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,06,11,48,\"서브웨이\",\"3900\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,03,12,43,\"교통카드\",\"10000\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,03,15,39,\"기숙사\",\"500000\")");
+            //DB.execSQL("INSERT INTO history VALUES(2018,07,03,17,32,\"계절학기\",\"50000\")");
+
 
 
 
