@@ -14,6 +14,7 @@
         android:background="#b94646"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -26,31 +27,42 @@
 
         >
 
+
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/image_btn1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/circle"
+            android:layout_height="@dimen/tab_height"
+            android:layout_weight="1"
+            android:src="@drawable/boy_hand_drawn_face_04"
+            android:background="@drawable/tab_bg_selector"
+            android:scaleType="centerInside"
+
+            android:layout_gravity="center"
+            android:padding="10dp"
             />
 
-        <Button
-            android:id="@+id/btn_second"
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/image_btn2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/tab_height"
             android:layout_weight="1"
-            android:text="Second Tab"
-            android:textColor="@drawable/tab_color_selector"
+            android:src="@drawable/picture_hanging_in_a_frame_hand_drawn_symbol_transparent"
+            android:scaleType="centerInside"
             android:background="@drawable/tab_bg_selector"
+            android:layout_gravity="center"
+            android:padding="@dimen/tab_padding"
             />
 
-        <Button
-            android:id="@+id/btn_third"
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/image_btn3"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/tab_height"
             android:layout_weight="1"
-            android:text="Third Tab"
-            android:textColor="@drawable/tab_color_selector"
+            android:src="@drawable/money_bag_hand_drawn_variant_transparent"
+            android:scaleType="centerInside"
             android:background="@drawable/tab_bg_selector"
+            android:padding="@dimen/tab_padding"
+            android:layout_gravity="center"
             />
 
 
@@ -61,7 +73,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="515dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/ll"
 
         >

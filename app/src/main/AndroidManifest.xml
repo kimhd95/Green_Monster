@@ -49,6 +49,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.example.q.Tab1andTab2_01.AddItemActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

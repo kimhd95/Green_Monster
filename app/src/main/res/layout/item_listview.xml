@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/time_TEXTVIEW"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:fontFamily="monospace" />
+
+    <TextView
+        android:id="@+id/description_TEXTVIEW"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_weight="5"
+        android:gravity="center_vertical"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:fontFamily="casual" />
+
+    <TextView
+        android:id="@+id/sum_TEXTVIEW"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="4"
+        android:gravity="right"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="casual" />
+</LinearLayout>

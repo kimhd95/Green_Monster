@@ -32,22 +32,29 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = (LinearLayout)findViewById(R.id.ll);
 
         //Button btn_first = (Button)findViewById(R.id.btn_first);
-        Button btn_second = (Button)findViewById(R.id.btn_second);
-        Button btn_third = (Button)findViewById(R.id.btn_third);
+        //Button btn_second = (Button)findViewById(R.id.btn_second);
+        //Button btn_third = (Button)findViewById(R.id.btn_third);
         ImageButton imageButton1 = (ImageButton)findViewById(R.id.image_btn1);
+        ImageButton imageButton2 = (ImageButton)findViewById(R.id.image_btn2);
+        ImageButton imageButton3 = (ImageButton)findViewById(R.id.image_btn3);
 
         viewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(0);
 
         //btn_first.setOnClickListener(movePageListener);
         //btn_first.setTag(0);
-        btn_second.setOnClickListener(movePageListener);
-        btn_second.setTag(1);
-        btn_third.setOnClickListener(movePageListener);
-        btn_third.setTag(2);
+        //btn_second.setOnClickListener(movePageListener);
+        //btn_second.setTag(1);
+        //btn_third.setOnClickListener(movePageListener);
+        //btn_third.setTag(2);
 
         imageButton1.setOnClickListener(movePageListener);
         imageButton1.setTag(0);
+        imageButton2.setOnClickListener(movePageListener);
+        imageButton2.setTag(1);
+        imageButton3.setOnClickListener(movePageListener);
+        imageButton3.setTag(2);
+
 
         //btn_first.setSelected(true);
         imageButton1.setSelected(true);

@@ -38,14 +38,6 @@
         app:srcCompat="@android:drawable/ic_menu_call"
         />
 
-    <Button
-        android:id="@+id/scrolltop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="scrolltop"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
     <ImageButton
         android:id="@+id/imageScrollTop"
         android:layout_width="30dp"
@@ -53,7 +45,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/scrolltop_transparent_03"
         android:background="@android:color/transparent"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
