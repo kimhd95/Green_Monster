@@ -214,7 +214,20 @@ public class FirstFragment extends Fragment{
                     startActivity(intent);
 
                     // Toast.makeText(getActivity(), Integer.toString(send_time) + "(" + Integer.toString(send_percent) + "%)", Toast.LENGTH_LONG).show();
-                } 
+                }  else {
+                    String name = firstFragmentContactModelArrayList.get(position).getName();
+                    String phone = firstFragmentContactModelArrayList.get(position).getNumber();
+
+                    intent = new Intent(getActivity(), ContactDetailPage.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("phone", phone.substring(1));
+                    intent.putExtra("duration", "00:00:00");
+                    intent.putExtra("call", "0");
+                    intent.putExtra("receive", "0");
+                    intent.putExtra("send", "0");
+                    intent.putExtra("absence", "0");
+                    startActivity(intent);
+                }
             }
         });
 

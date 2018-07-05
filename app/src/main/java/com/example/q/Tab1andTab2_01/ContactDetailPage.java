@@ -3,6 +3,7 @@ package com.example.q.Tab1andTab2_01;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class ContactDetailPage extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class ContactDetailPage extends AppCompatActivity {
 
         intent = getIntent();
         name = intent.getStringExtra("name");
-        phone = intent.getStringExtra("phone");
+        phone = intent.getStringExtra("phone").replaceAll("-", "");
         dur = intent.getStringExtra("duration");
         call = intent.getStringExtra("call");
         rec = intent.getStringExtra("receive");
