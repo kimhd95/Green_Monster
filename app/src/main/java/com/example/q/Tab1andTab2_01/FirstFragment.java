@@ -6,13 +6,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -28,6 +31,9 @@ public class FirstFragment extends Fragment{
     }
 
     private ListView listView;
+    private FloatingActionButton floatingActionButton;
+    private ImageButton btnScrollTop;
+
     private  FirstFragmentListViewAdapter firstFragmentListViewAdapter;
     private ArrayList<FirstFragmentContactModel> firstFragmentContactModelArrayList;
     private final static String SpecialNumber = "010-0000-0000";
@@ -48,6 +54,8 @@ public class FirstFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_first,null);
 
         listView = (ListView)view.findViewById(R.id.listview1);
+        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+
 
         firstFragmentContactModelArrayList = new ArrayList<>();
 
@@ -113,14 +121,23 @@ public class FirstFragment extends Fragment{
 
 
         // Log.d("Test","what is name? " + firstFragmentContactModelArrayList.get(firstFragmentContactModelArrayList.size()-1).getName());
-
-
         firstFragmentListViewAdapter = new FirstFragmentListViewAdapter(getActivity(), firstFragmentContactModelArrayList);
         listView.setAdapter(firstFragmentListViewAdapter);
+
+
+        floatingActionButton.setOnClickListener(new FloatingActionButton.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                listView.smoothScrollToPosition(0);
+
+            }
+
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Log.d("Test03", "positionis "+position);
                 Toast.makeText(getActivity(), firstFragmentContactModelArrayList.get(position).getName(), Toast.LENGTH_LONG).show();
                 /*
                 FirstFragmentPhoneCall firstFragmentPhoneCall;
@@ -146,9 +163,25 @@ public class FirstFragment extends Fragment{
             }
         });
 
+        btnScrollTop = (ImageButton)view.findViewById(R.id.imageScrollTop);
+        btnScrollTop.setOnClickListener(new ImageButton.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //listView.smoothScrollByOffset(0);
+                listView.smoothScrollToPositionFromTop(0,0);
+            }});
+
 
         return view;
     }
+
+
+
+
+
+
+
+
 
     private String getInitialSound(String text) {
         String[] chs = {

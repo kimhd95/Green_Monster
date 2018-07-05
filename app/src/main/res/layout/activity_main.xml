@@ -26,14 +26,11 @@
 
         >
 
-        <Button
-            android:id="@+id/btn_first"
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/image_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="First Tab"
-            android:textColor="@drawable/tab_color_selector"
-            android:background="@drawable/tab_bg_selector"
+            android:src="@drawable/circle"
             />
 
         <Button
@@ -55,6 +52,10 @@
             android:textColor="@drawable/tab_color_selector"
             android:background="@drawable/tab_bg_selector"
             />
+
+
+
+
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

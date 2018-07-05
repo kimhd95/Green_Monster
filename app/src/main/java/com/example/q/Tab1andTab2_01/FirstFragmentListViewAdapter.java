@@ -50,6 +50,7 @@ public class FirstFragmentListViewAdapter extends BaseAdapter{
         ViewHolder holder;
         ArrayList<String> korean;
         String FirstLetter = contactModelArrayList.get(position).getName().substring(0,1);
+        // Log.d("Test02", "position 0 is "+contactModelArrayList.get(0).getName());
 
         if(contactModelArrayList.get(position).getNumber().equals(SpecialNumber))
         {
